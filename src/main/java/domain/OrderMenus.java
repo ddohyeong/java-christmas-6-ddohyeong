@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OrderMenus {
@@ -9,6 +10,10 @@ public class OrderMenus {
 
 	public OrderMenus(Menus menus, String input) {
 		validateOrderMenusFormat(input);
+	}
+
+	public List<String> splitByComma(String input) {
+		return Arrays.asList(input.split(","));
 	}
 
 	private void validateOrderMenusFormat(String input) {

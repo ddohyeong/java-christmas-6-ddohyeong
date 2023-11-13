@@ -2,7 +2,11 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -18,4 +22,18 @@ class OrderMenusTest {
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("메뉴 입력을 쉼표로 분리")
+	@Test
+	public void testSplitByComma() {
+		// given
+		String input = "양송이수프-1,제로콜라-1";
+		List<String> excepted = List.of("양송이수프-1", "제로콜라-1");
+
+		// when
+		OrderMenus orderMenus = new OrderMenus(menus, input);
+		orderMenus.splitByComma(input);
+
+		// then
+		Assertions.assertThat(orderMenus.splitByComma(input)).isEqualTo(excepted);
+	}
 }
