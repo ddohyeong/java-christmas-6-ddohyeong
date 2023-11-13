@@ -58,4 +58,22 @@ public class Menus {
 		}
 	}
 
+	public void validateHasOnlyDrink() {
+		if (getTotalAmountNonDrink() == 0) {
+			throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
+		}
+	}
+
+	private int getTotalAmountNonDrink() {
+		int totalAmountNonDrink = 0;
+
+		for (Menu<? extends Enum<?>> menu : menus) {
+			if (!(menu instanceof DrinkMenu)) {
+				totalAmountNonDrink += menu.getTotalAmount();
+			}
+		}
+
+		return totalAmountNonDrink;
+	}
+
 }

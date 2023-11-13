@@ -1,5 +1,7 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ class MenusTest {
 
 		return menus;
 	}
+
 	@DisplayName("주문한 메뉴 이름에 따라 메뉴 찾기")
 	@Test
 	public void testFindEnumValueInMenuName() {
@@ -57,5 +60,20 @@ class MenusTest {
 		Assertions.assertThat(menus.getMenus())
 				.usingRecursiveFieldByFieldElementComparator()
 				.containsExactlyElementsOf(initTestMenus().getMenus());
+	}
+
+	@DisplayName("음료만 주문 시 예외 발생")
+	@Test
+	public void testValidateHasOnlyDrink() {
+		// given
+		String input = "샴페인-3,레드와인-4,제로콜라-4";
+		Menus menus = new Menus();
+
+		OrderMenus orderMenus = new OrderMenus(menus, input);
+		menus.order(orderMenus);
+
+		// when & then
+		assertThatThrownBy(() -> menus.validateHasOnlyDrink())
+				.isInstanceOf(IllegalArgumentException.class);
 	}
 }
