@@ -1,11 +1,17 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class OrderMenu {
-	private String menuName;
-	private int amount;
+	private final String menuName;
+	private final int amount;
 
 	public OrderMenu(String input) {
 		validateOrderMenuFormat(input);
+		List<String> orderMenu = splitByHyphen(input);
+		this.menuName = orderMenu.get(0);
+		this.amount = Integer.parseInt(orderMenu.get(1));
 	}
 
 	public String getMenuName() {
@@ -22,4 +28,7 @@ public class OrderMenu {
 		}
 	}
 
+	private List<String> splitByHyphen(String input) {
+		return Arrays.asList(input.split("-"));
+	}
 }
