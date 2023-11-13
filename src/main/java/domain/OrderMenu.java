@@ -50,7 +50,7 @@ public class OrderMenu {
 	}
 
 	private static boolean isMenuExists(Menus menus, String input) {
-		return menus.findEnumValueInMenus(input) == null;
+		return menus.findEnumValueInMenuName(input) == null;
 	}
 
 	private void validateAmountZero(int amount) {
@@ -58,5 +58,4 @@ public class OrderMenu {
 			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
 		}
 	}
-
 }
