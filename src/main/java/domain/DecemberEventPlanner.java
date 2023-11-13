@@ -2,6 +2,7 @@ package domain;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 public class DecemberEventPlanner {
 	public Boolean isChristmasDiscountDay(ReservationDate reservationDate) {
@@ -23,4 +24,17 @@ public class DecemberEventPlanner {
 		return !isWeekendDiscount(reservationDate);
 	}
 
+	public Boolean isSpecialDiscount(ReservationDate reservationDate) {
+		List<Integer> specialDay = List.of(3, 10, 17, 24, 25, 31);
+		LocalDate date = reservationDate.getReservationDate();
+
+		for (Integer day : specialDay) {
+			LocalDate dateToCheck = LocalDate.of(2023, 12, day);
+
+			if (date.isEqual(dateToCheck)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
