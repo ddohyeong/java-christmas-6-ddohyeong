@@ -43,4 +43,19 @@ public class Menus {
 		}
 		return null;
 	}
+
+	public void order(OrderMenus orderMenus) {
+		for (OrderMenu orderMenu : orderMenus.getOrderMenus()) {
+			putOrderMenu(orderMenu);
+		}
+	}
+
+	private void putOrderMenu(OrderMenu orderMenu) {
+		for (Menu<? extends Enum<?>> menuType : this.menus) {
+			if (menuType.equals(findMenuCategory(orderMenu.getMenuName()))) {
+				menuType.putMenu(findEnumValueInMenuName(orderMenu.getMenuName()), orderMenu.getAmount());
+			}
+		}
+	}
+
 }
