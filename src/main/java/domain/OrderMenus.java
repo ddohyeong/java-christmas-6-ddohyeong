@@ -10,6 +10,16 @@ public class OrderMenus {
 
 	public OrderMenus(Menus menus, String input) {
 		validateOrderMenusFormat(input);
+		List<String> orderMenusByComma = splitByComma(input);
+
+		for (String s : orderMenusByComma) {
+			OrderMenu orderMenu = new OrderMenu(menus, s);
+			this.totalAmount += orderMenu.getAmount();
+
+			validateTotalAmountRange(totalAmount);
+			this.orderMenus.add(orderMenu);
+		}
+
 	}
 
 	public List<String> splitByComma(String input) {
@@ -18,6 +28,12 @@ public class OrderMenus {
 
 	private void validateOrderMenusFormat(String input) {
 		if (!input.matches("^[^,-]+-[^,-]+(,[^,-]+-[^,-]+)*$")) {
+			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+		}
+	}
+
+	private void validateTotalAmountRange(int totalAmount) {
+		if (totalAmount > 20) {
 			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
 		}
 	}

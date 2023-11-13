@@ -36,4 +36,15 @@ class OrderMenusTest {
 		// then
 		Assertions.assertThat(orderMenus.splitByComma(input)).isEqualTo(excepted);
 	}
+
+	@DisplayName("주문 개수가 총 20개가 넘으면 예외 발생")
+	@Test
+	public void testValidateTotalAmountRange() {
+		// given
+		String input = "양송이수프-20,제로콜라-1";
+
+		// when & then
+		assertThatThrownBy(() -> new OrderMenus(menus, input))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
 }
