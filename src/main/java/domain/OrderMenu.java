@@ -13,9 +13,16 @@ public class OrderMenu {
 
 		String orderMenuName = orderMenu.get(0);
 		validateMenuExists(menus, orderMenuName);
-
 		this.menuName = orderMenuName;
-		this.amount = Integer.parseInt(orderMenu.get(1));
+
+		int orderAmount = getParseInt(orderMenu.get(1));
+		validateAmountZero(orderAmount);
+
+		this.amount = orderAmount;
+	}
+
+	private static int getParseInt(String amount) {
+		return Integer.parseInt(amount);
 	}
 
 	public String getMenuName() {
@@ -45,4 +52,11 @@ public class OrderMenu {
 	private static boolean isMenuExists(Menus menus, String input) {
 		return menus.findEnumValueInMenus(input) == null;
 	}
+
+	private void validateAmountZero(int amount) {
+		if (amount == 0) {
+			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+		}
+	}
+
 }

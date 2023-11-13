@@ -45,4 +45,15 @@ class OrderMenuTest {
 		assertThatThrownBy(() -> new OrderMenu(menus, input))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("주문 개수가 0일때 예외 발생")
+	@Test
+	public void testValidateAmountZero() {
+		// given
+		String input = "양송이수프-0";
+
+		// when & then
+		assertThatThrownBy(() -> new OrderMenu(menus, input))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
 }
