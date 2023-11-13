@@ -16,7 +16,7 @@ class OrderMenusTest {
 	@DisplayName("메뉴 형식(음식-주문수,음식-주문수..) 검증")
 	@ParameterizedTest
 	@ValueSource(strings = {"양송이버섯-4, 초코케이크", "초코케이크-4,티본스테이크"})
-	public void test3(String input) {
+	public void testValidateOrderMenusFormat(String input) {
 		// when & then
 		assertThatThrownBy(() -> new OrderMenus(menus, input))
 				.isInstanceOf(IllegalArgumentException.class);
