@@ -18,4 +18,9 @@ public class DecemberEventPlanner {
 
 		return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
 	}
+
+	public Boolean isWeekdayDiscount(ReservationDate reservationDate) {
+		return !isWeekendDiscount(reservationDate);
+	}
+
 }

@@ -32,4 +32,17 @@ class DecemberEventPlannerTest {
 		// then
 		Assertions.assertThat(christmasDiscountDay).isTrue();
 	}
+
+	@DisplayName("평일 할인 기간인지 검증")
+	@Test
+	public void testIsWeekdayDiscount() {
+		// given
+		ReservationDate reservationDate = new ReservationDate("10");
+
+		// when
+		Boolean christmasDiscountDay = decemberEventPlanner.isWeekdayDiscount(reservationDate);
+
+		// then
+		Assertions.assertThat(christmasDiscountDay).isTrue();
+	}
 }
