@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OrderMenus {
-	private List<OrderMenu> orderMenus = new ArrayList<>();
+	private final List<OrderMenu> orderMenus = new ArrayList<>();
 	private int totalAmount = 0;
 
 	public OrderMenus(Menus menus, String input) {
@@ -21,7 +21,14 @@ public class OrderMenus {
 			validateOrderMenusDuplicate(orderMenu.getMenuName());
 			this.orderMenus.add(orderMenu);
 		}
+	}
 
+	public List<OrderMenu> getOrderMenus() {
+		return orderMenus;
+	}
+
+	public int getTotalAmount() {
+		return totalAmount;
 	}
 
 	public List<String> splitByComma(String input) {
