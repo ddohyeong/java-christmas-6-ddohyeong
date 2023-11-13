@@ -34,4 +34,13 @@ public class Menus {
 		}
 		return null;
 	}
+
+	public Menu<? extends Enum<?>> findMenuCategory(String input) {
+		for (Menu<? extends Enum<?>> menuType : this.menus) {
+			if (menuType.fromString(input) != null) {
+				return menuType;
+			}
+		}
+		return null;
+	}
 }
