@@ -47,4 +47,15 @@ class OrderMenusTest {
 		assertThatThrownBy(() -> new OrderMenus(menus, input))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("중복되는 주문 메뉴가 있는 경우 예외 발생")
+	@Test
+	public void testValidateOrderMenusDuplicate() {
+		// given
+		String input = "양송이수프-5,양송이수프-10";
+
+		// when & then
+		assertThatThrownBy(() -> new OrderMenus(menus, input))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
 }
