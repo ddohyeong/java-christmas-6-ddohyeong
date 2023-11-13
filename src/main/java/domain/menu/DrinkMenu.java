@@ -7,13 +7,19 @@ import domain.menu.menuenum.Drink;
 
 public class DrinkMenu implements Menu<Drink> {
 	private final Map<Drink, Integer> drinkMenu;
-
+	private int totalAmount = 0;
 	public DrinkMenu() {
 		this.drinkMenu = new HashMap<>() {{
 				put(Drink.ZERO_COKE, 0);
 				put(Drink.RED_WINE, 0);
 				put(Drink.CHAMPAGNE, 0);
 			}};
+	}
+
+	@Override
+	public int getTotalAmount() {
+		calculateTotalAmount();
+		return totalAmount;
 	}
 
 	@Override
@@ -29,6 +35,13 @@ public class DrinkMenu implements Menu<Drink> {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void calculateTotalAmount() {
+		for (Integer amount : drinkMenu.values()) {
+			this.totalAmount += amount;
+		}
 	}
 
 	@Override

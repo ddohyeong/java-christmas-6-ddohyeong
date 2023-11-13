@@ -7,12 +7,18 @@ import domain.menu.menuenum.Dessert;
 
 public class DessertMenu implements Menu<Dessert> {
 	private final Map<Dessert, Integer> dessertMenu;
+	private int totalAmount = 0;
 
 	public DessertMenu() {
 		this.dessertMenu = new HashMap<>() {{
 				put(Dessert.ICE_CREAM, 0);
 				put(Dessert.CHOCO_CAKE, 0);
 			}};
+	}
+	@Override
+	public int getTotalAmount() {
+		calculateTotalAmount();
+		return totalAmount;
 	}
 
 	@Override
@@ -28,6 +34,13 @@ public class DessertMenu implements Menu<Dessert> {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void calculateTotalAmount() {
+		for (Integer amount : dessertMenu.values()) {
+			this.totalAmount += amount;
+		}
 	}
 
 	@Override
