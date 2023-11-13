@@ -1,5 +1,6 @@
 package domain;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class DecemberEventPlanner {
@@ -11,4 +12,10 @@ public class DecemberEventPlanner {
 		return !date.isBefore(christmasDiscountDayStart) && !date.isAfter(christmasDiscountDayEnd);
 	}
 
+	public Boolean isWeekendDiscount(ReservationDate reservationDate) {
+		LocalDate date = reservationDate.getReservationDate();
+		DayOfWeek dayOfWeek = date.getDayOfWeek();
+
+		return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
+	}
 }
