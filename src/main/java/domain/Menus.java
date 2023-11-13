@@ -15,18 +15,18 @@ public class Menus {
 	public Menus() {
 		menus = new ArrayList<>();
 		menus.add(new MainCourseMenu());
-		menus.add(new DrinkMenu());
-		menus.add(new DessertMenu());
 		menus.add(new AppetizerMenu());
+		menus.add(new DessertMenu());
+		menus.add(new DrinkMenu());
 	}
 
 	public List<Menu<? extends Enum<?>>> getMenus() {
 		return menus;
 	}
 
-	public Enum<? extends Enum<?>> findEnumValueInMenus(String input) {
-		for (Menu<? extends Enum<?>> menuType : menus) {
-			Enum<? extends Enum<?>> menuTypeConverter = menuType.fromString(input);
+	public Enum<? extends Enum<?>> findEnumValueInMenuName(String input) {
+		for (Menu<? extends Enum<?>> menuCategory : menus) {
+			Enum<? extends Enum<?>> menuTypeConverter = menuCategory.fromString(input);
 
 			if (menuTypeConverter != null) {
 				return menuTypeConverter;
@@ -34,5 +34,4 @@ public class Menus {
 		}
 		return null;
 	}
-
 }
