@@ -14,6 +14,10 @@ public class ReservationDate {
 		this.reservationDate = LocalDate.of(2023, 12, date);
 	}
 
+	public LocalDate getReservationDate() {
+		return reservationDate;
+	}
+
 	public void validateIsDigit(String date) {
 		Pattern pattern = Pattern.compile("^[0-9]+$");
 		Matcher matcher = pattern.matcher(date);
