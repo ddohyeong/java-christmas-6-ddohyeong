@@ -31,8 +31,8 @@ public class AppetizerMenu implements Menu<Appetizer> {
 	}
 
 	@Override
-	public Map<Appetizer, Integer> getMenuItems() {
-		return appetizerMenu;
+	public Map<Appetizer, Integer> getMenu() {
+		return this.appetizerMenu;
 	}
 
 	@Override

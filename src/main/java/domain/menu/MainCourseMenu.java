@@ -8,6 +8,7 @@ import domain.menu.menuenum.MainCourse;
 public class MainCourseMenu implements Menu<MainCourse> {
 	private final Map<MainCourse, Integer> mainMenu;
 	private int totalAmount = 0;
+
 	public MainCourseMenu() {
 		this.mainMenu = new HashMap<>() {{
 				put(MainCourse.T_BONE_STEAK, 0);
@@ -16,6 +17,7 @@ public class MainCourseMenu implements Menu<MainCourse> {
 				put(MainCourse.CHRISTMAS_PASTA, 0);
 			}};
 	}
+
 	@Override
 	public int getTotalAmount() {
 		calculateTotalAmount();
@@ -23,8 +25,8 @@ public class MainCourseMenu implements Menu<MainCourse> {
 	}
 
 	@Override
-	public Map<MainCourse, Integer> getMenuItems() {
-		return mainMenu;
+	public Map<MainCourse, Integer> getMenu() {
+		return this.mainMenu;
 	}
 
 	@Override

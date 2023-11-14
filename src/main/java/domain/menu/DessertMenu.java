@@ -15,6 +15,7 @@ public class DessertMenu implements Menu<Dessert> {
 				put(Dessert.CHOCO_CAKE, 0);
 			}};
 	}
+
 	@Override
 	public int getTotalAmount() {
 		calculateTotalAmount();
@@ -22,8 +23,8 @@ public class DessertMenu implements Menu<Dessert> {
 	}
 
 	@Override
-	public Map<Dessert, Integer> getMenuItems() {
-		return dessertMenu;
+	public Map<Dessert, Integer> getMenu() {
+		return this.dessertMenu;
 	}
 
 	@Override

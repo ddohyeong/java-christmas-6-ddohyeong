@@ -3,7 +3,7 @@ package domain.menu;
 import java.util.Map;
 
 public interface Menu<T extends Enum<T>> {
-	Map<T, Integer> getMenuItems();
+	Map<T, Integer> getMenu();
 
 	T fromString(String input);
 

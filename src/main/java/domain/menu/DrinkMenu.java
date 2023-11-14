@@ -8,6 +8,7 @@ import domain.menu.menuenum.Drink;
 public class DrinkMenu implements Menu<Drink> {
 	private final Map<Drink, Integer> drinkMenu;
 	private int totalAmount = 0;
+
 	public DrinkMenu() {
 		this.drinkMenu = new HashMap<>() {{
 				put(Drink.ZERO_COKE, 0);
@@ -23,8 +24,8 @@ public class DrinkMenu implements Menu<Drink> {
 	}
 
 	@Override
-	public Map<Drink, Integer> getMenuItems() {
-		return drinkMenu;
+	public Map<Drink, Integer> getMenu() {
+		return this.drinkMenu;
 	}
 
 	@Override
@@ -35,6 +36,10 @@ public class DrinkMenu implements Menu<Drink> {
 			}
 		}
 		return null;
+	}
+
+	public Map<Drink, Integer> getDrinkMenu() {
+		return drinkMenu;
 	}
 
 	@Override
