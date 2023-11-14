@@ -94,4 +94,19 @@ class BenefitCalculatorTest {
 		// when & then
 		Assertions.assertThat(benefitCalculator.getWeekendDayDiscount()).isEqualTo(excepted);
 	}
+
+	@DisplayName("특별 할인 - 1000원 할인")
+	@Test
+	public void testApplySpecialDayDiscount() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("24");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"티본스테이크-3");
+
+		int excepted = 1000;
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getSpecialDayDiscount()).isEqualTo(excepted);
+	}
 }
