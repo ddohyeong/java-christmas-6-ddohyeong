@@ -5,6 +5,8 @@ public class BenefitCalculator {
 	private int weekDayDiscount = 0;
 	private int weekendDayDiscount = 0;
 	private int specialDayDiscount = 0;
+	private int freeGiftMenuDiscount = 0;
+	private Boolean eventApplicability = false;
 
 	public BenefitCalculator(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		isEventApplicability(orderCalculator);
@@ -30,8 +32,16 @@ public class BenefitCalculator {
 		return specialDayDiscount;
 	}
 
-	public boolean isEventApplicability(OrderTotalCalculator orderTotalCalculator) {
-		return orderTotalCalculator.getTotalBills() >= 10_000;
+	public Boolean getEventApplicability() {
+		return eventApplicability;
+	}
+
+	public int getFreeGiftMenuDiscount() {
+		return freeGiftMenuDiscount;
+	}
+
+	private void isEventApplicability(OrderCalculator orderCalculator) {
+		this.eventApplicability = orderCalculator.getTotalBills() >= 10_000;
 	}
 
 	private void applyChristmasDiscount(DecemberEventPlanner decemberEventPlanner) {

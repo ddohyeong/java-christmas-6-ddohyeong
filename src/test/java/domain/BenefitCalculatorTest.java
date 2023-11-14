@@ -29,9 +29,8 @@ class BenefitCalculatorTest {
 				"티본스테이크-1,바비큐립-1,초코케이크-2"
 		);
 
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
 		// when
-		boolean eventApplicability = benefitCalculator.isEventApplicability(orderTotalCalculator);
+		boolean eventApplicability = benefitCalculator.getEventApplicability();
 
 		// then
 		Assertions.assertThat(eventApplicability).isTrue();
@@ -44,10 +43,9 @@ class BenefitCalculatorTest {
 		MenuManager menuManager = new MenuManager();
 		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("12");
 		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner, "양송이수프-1");
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
 
 		// when
-		boolean eventApplicability = benefitCalculator.isEventApplicability(orderTotalCalculator);
+		boolean eventApplicability = benefitCalculator.getEventApplicability();
 
 		// then
 		Assertions.assertThat(eventApplicability).isFalse();
