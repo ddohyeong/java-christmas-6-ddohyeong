@@ -1,8 +1,11 @@
 package domain.menu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import domain.MenuMessage;
 import domain.menu.menuenum.Dessert;
 
 public class DessertMenu implements Menu<Dessert> {
@@ -18,7 +21,6 @@ public class DessertMenu implements Menu<Dessert> {
 
 	@Override
 	public int getTotalAmount() {
-		calculateTotalAmount();
 		return totalAmount;
 	}
 
@@ -47,5 +49,19 @@ public class DessertMenu implements Menu<Dessert> {
 	@Override
 	public void putMenu(Enum<? extends Enum<?>> category, int amount) {
 		dessertMenu.put((Dessert)category, dessertMenu.get(category) + amount);
+		this.totalAmount += amount;
+	}
+
+	@Override
+	public List<MenuMessage> createMenusMessage() {
+		List<MenuMessage> messages = new ArrayList<>();
+		for (Map.Entry<Dessert, Integer> dessert : dessertMenu.entrySet()) {
+			String menuName = dessert.getKey().getMenuName();
+			int amount = dessert.getValue();
+			if (amount > 0) {
+				messages.add(new MenuMessage(menuName, amount));
+			}
+		}
+		return messages;
 	}
 }
