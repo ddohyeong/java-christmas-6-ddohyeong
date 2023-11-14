@@ -7,12 +7,12 @@ public class OrderMenu {
 	private final String menuName;
 	private final int amount;
 
-	public OrderMenu(Menus menus, String input) {
+	public OrderMenu(MenuManager menuManager, String input) {
 		validateOrderMenuFormat(input);
 		List<String> orderMenu = splitByHyphen(input);
 
 		String orderMenuName = orderMenu.get(0);
-		validateMenuExists(menus, orderMenuName);
+		validateMenuExists(menuManager, orderMenuName);
 		this.menuName = orderMenuName;
 
 		int orderAmount = getParseInt(orderMenu.get(1));
@@ -43,14 +43,14 @@ public class OrderMenu {
 		return Arrays.asList(input.split("-"));
 	}
 
-	private void validateMenuExists(Menus menus, String input) {
-		if (isMenuExists(menus, input)) {
+	private void validateMenuExists(MenuManager menuManager, String input) {
+		if (isMenuExists(menuManager, input)) {
 			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
 		}
 	}
 
-	private static boolean isMenuExists(Menus menus, String input) {
-		return menus.findEnumValueInMenuName(input) == null;
+	private static boolean isMenuExists(MenuManager menuManager, String input) {
+		return menuManager.findEnumValueInMenuName(input) == null;
 	}
 
 	private void validateAmountZero(int amount) {

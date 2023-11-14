@@ -9,14 +9,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderMenuTest {
-	private final Menus menus = new Menus();
+	private final MenuManager menuManager = new MenuManager();
 
 	@DisplayName("형식(음식-주문 개수) 검증")
 	@ParameterizedTest
 	@ValueSource(strings = {"4-초코케이크", "양송이수프-양송이수프", "!@-4", "양송이수프=4"})
 	public void testValidateOrderMenuFormat(String input) {
 		// when & then
-		assertThatThrownBy(() -> new OrderMenu(menus, input))
+		assertThatThrownBy(() -> new OrderMenu(menuManager, input))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -29,7 +29,7 @@ class OrderMenuTest {
 		int exceptedAmount = 1;
 
 		// when
-		OrderMenu orderMenu = new OrderMenu(menus, input);
+		OrderMenu orderMenu = new OrderMenu(menuManager, input);
 
 		// then
 		Assertions.assertThat(orderMenu.getMenuName()).isEqualTo(exceptedMenuName);
@@ -42,7 +42,7 @@ class OrderMenuTest {
 		//given
 		String input = "탕수육-1";
 		// when & then
-		assertThatThrownBy(() -> new OrderMenu(menus, input))
+		assertThatThrownBy(() -> new OrderMenu(menuManager, input))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -53,7 +53,7 @@ class OrderMenuTest {
 		String input = "양송이수프-0";
 
 		// when & then
-		assertThatThrownBy(() -> new OrderMenu(menus, input))
+		assertThatThrownBy(() -> new OrderMenu(menuManager, input))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 }

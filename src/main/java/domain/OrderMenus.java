@@ -8,12 +8,12 @@ public class OrderMenus {
 	private final List<OrderMenu> orderMenus = new ArrayList<>();
 	private int totalAmount = 0;
 
-	public OrderMenus(Menus menus, String input) {
+	public OrderMenus(MenuManager menuManager, String input) {
 		validateOrderMenusFormat(input);
 		List<String> orderMenusByComma = splitByComma(input);
 
 		for (String s : orderMenusByComma) {
-			OrderMenu orderMenu = new OrderMenu(menus, s);
+			OrderMenu orderMenu = new OrderMenu(menuManager, s);
 
 			this.totalAmount += orderMenu.getAmount();
 			validateTotalAmountRange(totalAmount);

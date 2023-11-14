@@ -12,25 +12,25 @@ import domain.menu.menuenum.Dessert;
 import domain.menu.menuenum.Drink;
 import domain.menu.menuenum.MainCourse;
 
-class MenusTest {
-	private Menus initTestMenus() {
-		Menus menus = new Menus();
-		menus.getMenus().get(0).putMenu(MainCourse.T_BONE_STEAK, 3);
-		menus.getMenus().get(1).putMenu(Appetizer.MUSHROOM_SOUP, 4);
-		menus.getMenus().get(2).putMenu(Dessert.CHOCO_CAKE, 3);
-		menus.getMenus().get(3).putMenu(Drink.ZERO_COKE, 4);
+class MenuManagerTest {
+	private MenuManager initTestMenus() {
+		MenuManager menuManager = new MenuManager();
+		menuManager.getMenus().get(0).putMenu(MainCourse.T_BONE_STEAK, 3);
+		menuManager.getMenus().get(1).putMenu(Appetizer.MUSHROOM_SOUP, 4);
+		menuManager.getMenus().get(2).putMenu(Dessert.CHOCO_CAKE, 3);
+		menuManager.getMenus().get(3).putMenu(Drink.ZERO_COKE, 4);
 
-		return menus;
+		return menuManager;
 	}
 
 	@DisplayName("주문한 메뉴 이름에 따라 메뉴 찾기")
 	@Test
 	public void testFindEnumValueInMenuName() {
 		// given
-		Menus menus = new Menus();
+		MenuManager menuManager = new MenuManager();
 
 		// when & then
-		Assertions.assertThat(menus.findEnumValueInMenuName("양송이수프"))
+		Assertions.assertThat(menuManager.findEnumValueInMenuName("양송이수프"))
 				.isEqualTo(Appetizer.MUSHROOM_SOUP);
 	}
 
@@ -38,10 +38,10 @@ class MenusTest {
 	@Test
 	public void testFindMenuCategory() {
 		// given
-		Menus menus = new Menus();
+		MenuManager menuManager = new MenuManager();
 
 		// when & then
-		Assertions.assertThat(menus.findMenuCategory("양송이수프").getClass())
+		Assertions.assertThat(menuManager.findMenuCategory("양송이수프").getClass())
 				.isEqualTo(AppetizerMenu.class);
 	}
 
@@ -50,14 +50,14 @@ class MenusTest {
 	public void testOrder() {
 		// given
 		String input = "티본스테이크-3,양송이수프-4,초코케이크-3,제로콜라-4";
-		Menus menus = new Menus();
-		OrderMenus orderMenus = new OrderMenus(menus, input);
+		MenuManager menuManager = new MenuManager();
+		OrderMenus orderMenus = new OrderMenus(menuManager, input);
 
 		// when
-		menus.order(orderMenus);
+		menuManager.order(orderMenus);
 
 		// then
-		Assertions.assertThat(menus.getMenus())
+		Assertions.assertThat(menuManager.getMenus())
 				.usingRecursiveFieldByFieldElementComparator()
 				.containsExactlyElementsOf(initTestMenus().getMenus());
 	}
@@ -67,13 +67,13 @@ class MenusTest {
 	public void testValidateHasOnlyDrink() {
 		// given
 		String input = "샴페인-3,레드와인-4,제로콜라-4";
-		Menus menus = new Menus();
+		MenuManager menuManager = new MenuManager();
 
-		OrderMenus orderMenus = new OrderMenus(menus, input);
-		menus.order(orderMenus);
+		OrderMenus orderMenus = new OrderMenus(menuManager, input);
+		menuManager.order(orderMenus);
 
 		// when & then
-		assertThatThrownBy(() -> menus.validateHasOnlyDrink())
+		assertThatThrownBy(() -> menuManager.validateHasOnlyDrink())
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 }

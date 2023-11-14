@@ -9,10 +9,10 @@ import domain.menu.DrinkMenu;
 import domain.menu.MainCourseMenu;
 import domain.menu.Menu;
 
-public class Menus {
+public class MenuManager {
 	private final List<Menu<? extends Enum<?>>> menus;
 
-	public Menus() {
+	public MenuManager() {
 		menus = new ArrayList<>();
 		menus.add(new MainCourseMenu());
 		menus.add(new AppetizerMenu());
