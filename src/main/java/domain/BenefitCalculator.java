@@ -1,11 +1,13 @@
 package domain;
 
+import domain.menu.menuenum.Drink;
+
 public class BenefitCalculator {
 	private int christmasDiscount = 0;
 	private int weekDayDiscount = 0;
 	private int weekendDayDiscount = 0;
 	private int specialDayDiscount = 0;
-	private int freeGiftMenuDiscount = 0;
+	private Drink freeGiftMenuDiscount;
 	private Boolean eventApplicability = false;
 
 	public BenefitCalculator(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
@@ -14,6 +16,7 @@ public class BenefitCalculator {
 		applyWeekDayDiscount(decemberEventPlanner, orderCalculator);
 		applyWeekendDayDiscount(decemberEventPlanner, orderCalculator);
 		applySpecialDayDiscount(decemberEventPlanner);
+		applyFreeGiftMenu(orderCalculator);
 	}
 
 	public int getChristmasDiscount() {
@@ -36,12 +39,18 @@ public class BenefitCalculator {
 		return eventApplicability;
 	}
 
-	public int getFreeGiftMenuDiscount() {
+	public Drink getFreeGiftMenu() {
 		return freeGiftMenuDiscount;
 	}
 
 	private void isEventApplicability(OrderCalculator orderCalculator) {
 		this.eventApplicability = orderCalculator.getTotalBills() >= 10_000;
+	}
+
+	private void applyFreeGiftMenu(OrderCalculator orderCalculator) {
+		if (orderCalculator.getTotalBills() >= 120_000) {
+			this.freeGiftMenuDiscount = Drink.CHAMPAGNE;
+		}
 	}
 
 	private void applyChristmasDiscount(DecemberEventPlanner decemberEventPlanner) {

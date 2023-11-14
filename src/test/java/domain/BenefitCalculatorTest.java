@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.menu.menuenum.Drink;
+
 class BenefitCalculatorTest {
 	private static DecemberEventPlanner getDecemberEventPlanner(String inputDate) {
 		ReservationDate reservationDate = new ReservationDate(inputDate);
@@ -107,5 +109,31 @@ class BenefitCalculatorTest {
 
 		// when & then
 		Assertions.assertThat(benefitCalculator.getSpecialDayDiscount()).isEqualTo(excepted);
+	}
+
+	@DisplayName("증정 메뉴 - 12만원 이상 구매시 샴페인 증정")
+	@Test
+	public void testApplyFreeGiftMenuTrue() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("24");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"티본스테이크-5");
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getFreeGiftMenu()).isEqualTo(Drink.CHAMPAGNE);
+	}
+
+	@DisplayName("증정 메뉴 - 12만원 미만 구매시 샴페인 증정하지 않음")
+	@Test
+	public void testApplyFreeGiftMenuFail() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("24");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"티본스테이크-1");
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getFreeGiftMenu()).isNull();
 	}
 }
