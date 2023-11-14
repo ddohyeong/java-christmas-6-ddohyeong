@@ -56,4 +56,21 @@ class OrderTotalCalculatorTest {
 		// then
 		Assertions.assertThat(dessertBills).isEqualTo(excepted);
 	}
+
+	@DisplayName("음료 주문 금액 계산")
+	@Test
+	public void testGetDrinkBills() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		OrderMenus orderMenus = new OrderMenus(menuManager, "티본스테이크-1,바비큐립-1,초코케이크-2,레드와인-1,양송이수프-4");
+		menuManager.order(orderMenus);
+		int excepted = 60_000;
+
+		// when
+		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
+		int drinkBills = orderTotalCalculator.getDrinkBills();
+
+		// then
+		Assertions.assertThat(drinkBills).isEqualTo(excepted);
+	}
 }

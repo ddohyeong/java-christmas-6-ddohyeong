@@ -5,6 +5,7 @@ import java.util.Map;
 import domain.menu.Menu;
 import domain.menu.menuenum.Appetizer;
 import domain.menu.menuenum.Dessert;
+import domain.menu.menuenum.Drink;
 import domain.menu.menuenum.MainCourse;
 
 public class OrderTotalCalculator {
@@ -54,5 +55,19 @@ public class OrderTotalCalculator {
 		}
 
 		return dessertTotalPrice;
+	}
+
+	public int getDrinkBills() {
+		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(3);
+		int drinkTotalPrice = 0;
+
+		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
+			Drink menu = (Drink)entry.getKey();
+			Integer amount = entry.getValue();
+
+			drinkTotalPrice += menu.getPrice() * amount;
+		}
+
+		return drinkTotalPrice;
 	}
 }
