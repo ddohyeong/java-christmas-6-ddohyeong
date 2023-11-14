@@ -9,12 +9,14 @@ public class DecemberEventPlanner {
 	private final Boolean weekendDiscount;
 	private final Boolean weekDayDiscount;
 	private final Boolean specialDiscount;
+	private final int reservationDate;
 
 	public DecemberEventPlanner(ReservationDate reservationDate) {
 		this.christmasDiscountDay = isChristmasDiscountDay(reservationDate);
 		this.weekDayDiscount = isWeekdayDiscount(reservationDate);
 		this.weekendDiscount = isWeekendDiscount(reservationDate);
 		this.specialDiscount = isSpecialDiscount(reservationDate);
+		this.reservationDate = reservationDate.getReservationDate().getDayOfMonth();
 	}
 
 	public Boolean getChristmasDiscountDay() {
@@ -31,6 +33,10 @@ public class DecemberEventPlanner {
 
 	public Boolean getSpecialDiscount() {
 		return specialDiscount;
+	}
+
+	public int getReservationDate() {
+		return reservationDate;
 	}
 
 	private Boolean isChristmasDiscountDay(ReservationDate reservationDate) {
