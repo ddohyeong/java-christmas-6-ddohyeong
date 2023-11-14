@@ -15,6 +15,10 @@ public class OrderTotalCalculator {
 		this.menuManager = menuManager;
 	}
 
+	public int getTotalBills() {
+		return getMainCourseBills() + getAppetizerBills() + getDessertBills() + getDrinkBills();
+	}
+
 	public int getMainCourseBills() {
 		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(0);
 		int mainCourseTotalPrice = 0;
