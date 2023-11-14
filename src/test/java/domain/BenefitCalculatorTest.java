@@ -5,25 +5,31 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BenefitCalculatorTest {
+	private static DecemberEventPlanner getDecemberEventPlanner(String inputDate) {
+		ReservationDate reservationDate = new ReservationDate(inputDate);
+		return new DecemberEventPlanner(reservationDate);
+	}
 
-	private static OrderTotalCalculator getOrderTotalCalculator(String menus) {
-		MenuManager menuManager = new MenuManager();
-		OrderMenus orderMenus = new OrderMenus(menuManager, menus);
+	private static BenefitCalculator getBenefitCalculator(MenuManager menuManager,
+			DecemberEventPlanner decemberEventPlanner, String input) {
 
+		OrderMenus orderMenus = new OrderMenus(menuManager, input);
 		menuManager.order(orderMenus);
-		return new OrderTotalCalculator(menuManager);
+		return new BenefitCalculator(decemberEventPlanner, menuManager);
 	}
 
 	@DisplayName("총 가격 주문이 10000원 이상일때 이벤트 적용")
 	@Test
 	public void testIsEventApplicabilityTrue() {
 		// given
-		OrderTotalCalculator orderTotalCalculator = getOrderTotalCalculator("티본스테이크-1,바비큐립-1,초코케이크-2");
-		ReservationDate reservationDate = new ReservationDate("12");
-		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("12");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"티본스테이크-1,바비큐립-1,초코케이크-2"
+		);
 
+		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
 		// when
-		BenefitCalculator benefitCalculator = new BenefitCalculator(reservationDate, decemberEventPlanner);
 		boolean eventApplicability = benefitCalculator.isEventApplicability(orderTotalCalculator);
 
 		// then
@@ -34,10 +40,10 @@ class BenefitCalculatorTest {
 	@Test
 	public void testIsEventApplicabilityFail() {
 		// given
-		OrderTotalCalculator orderTotalCalculator = getOrderTotalCalculator("양송이수프-1");
-		ReservationDate reservationDate = new ReservationDate("12");
-		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
-		BenefitCalculator benefitCalculator = new BenefitCalculator(reservationDate, decemberEventPlanner);
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("12");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner, "양송이수프-1");
+		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
 
 		// when
 		boolean eventApplicability = benefitCalculator.isEventApplicability(orderTotalCalculator);
@@ -50,12 +56,28 @@ class BenefitCalculatorTest {
 	@Test
 	public void testGetChristmasDiscount() {
 		// given
-		ReservationDate reservationDate = new ReservationDate("25");
-		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
-		BenefitCalculator benefitCalculator = new BenefitCalculator(reservationDate, decemberEventPlanner);
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("25");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner, "초코케이크-3");
+
 		int excepted = 3400;
 
 		// when & then
 		Assertions.assertThat(benefitCalculator.getChristmasDiscount()).isEqualTo(excepted);
 	}
+
+	@DisplayName("평일 할인 - 디저트 3개 6069원 할인")
+	@Test
+	public void testApplyWeekDayDiscount() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("25");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner, "초코케이크-3");
+
+		int excepted = 6069;
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getWeekDayDiscount()).isEqualTo(excepted);
+	}
+
 }
