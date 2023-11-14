@@ -5,16 +5,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DecemberEventPlannerTest {
-	private final DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner();
 
 	@DisplayName("크리스마스 디데이 할인 기간인지 검증")
 	@Test
 	public void testIsChristmasDiscountDay() {
 		// given
 		ReservationDate reservationDate = new ReservationDate("12");
-
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
 		// when
-		Boolean christmasDiscountDay = decemberEventPlanner.isChristmasDiscountDay(reservationDate);
+		Boolean christmasDiscountDay = decemberEventPlanner.getChristmasDiscountDay();
 
 		// then
 		Assertions.assertThat(christmasDiscountDay).isTrue();
@@ -25,12 +24,13 @@ class DecemberEventPlannerTest {
 	public void testIsWeekendDiscount() {
 		// given
 		ReservationDate reservationDate = new ReservationDate("8");
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
 
 		// when
-		Boolean christmasDiscountDay = decemberEventPlanner.isWeekendDiscount(reservationDate);
+		Boolean weekendDiscount = decemberEventPlanner.getWeekendDiscount();
 
 		// then
-		Assertions.assertThat(christmasDiscountDay).isTrue();
+		Assertions.assertThat(weekendDiscount).isTrue();
 	}
 
 	@DisplayName("평일 할인 기간인지 검증")
@@ -38,12 +38,13 @@ class DecemberEventPlannerTest {
 	public void testIsWeekdayDiscount() {
 		// given
 		ReservationDate reservationDate = new ReservationDate("10");
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
 
 		// when
-		Boolean christmasDiscountDay = decemberEventPlanner.isWeekdayDiscount(reservationDate);
+		Boolean weekDayDiscount = decemberEventPlanner.getWeekDayDiscount();
 
 		// then
-		Assertions.assertThat(christmasDiscountDay).isTrue();
+		Assertions.assertThat(weekDayDiscount).isTrue();
 	}
 
 	@DisplayName("특별 할인 기간인지 검증")
@@ -51,11 +52,13 @@ class DecemberEventPlannerTest {
 	public void testIsSpecialDiscount() {
 		// given
 		ReservationDate reservationDate = new ReservationDate("25");
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
+
 
 		// when
-		Boolean christmasDiscountDay = decemberEventPlanner.isSpecialDiscount(reservationDate);
+		Boolean specialDiscount = decemberEventPlanner.getSpecialDiscount();
 
 		// then
-		Assertions.assertThat(christmasDiscountDay).isTrue();
+		Assertions.assertThat(specialDiscount).isTrue();
 	}
 }
