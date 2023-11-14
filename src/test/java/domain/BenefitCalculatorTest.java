@@ -19,9 +19,11 @@ class BenefitCalculatorTest {
 	public void testIsEventApplicabilityTrue() {
 		// given
 		OrderTotalCalculator orderTotalCalculator = getOrderTotalCalculator("티본스테이크-1,바비큐립-1,초코케이크-2");
+		ReservationDate reservationDate = new ReservationDate("12");
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
 
 		// when
-		BenefitCalculator benefitCalculator = new BenefitCalculator();
+		BenefitCalculator benefitCalculator = new BenefitCalculator(reservationDate, decemberEventPlanner);
 		boolean eventApplicability = benefitCalculator.isEventApplicability(orderTotalCalculator);
 
 		// then
@@ -33,12 +35,27 @@ class BenefitCalculatorTest {
 	public void testIsEventApplicabilityFail() {
 		// given
 		OrderTotalCalculator orderTotalCalculator = getOrderTotalCalculator("양송이수프-1");
+		ReservationDate reservationDate = new ReservationDate("12");
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
+		BenefitCalculator benefitCalculator = new BenefitCalculator(reservationDate, decemberEventPlanner);
+
 		// when
-		BenefitCalculator benefitCalculator = new BenefitCalculator();
 		boolean eventApplicability = benefitCalculator.isEventApplicability(orderTotalCalculator);
 
 		// then
 		Assertions.assertThat(eventApplicability).isFalse();
 	}
 
+	@DisplayName("크리스마스 디데이 할인 25일때 - 할인 가격 3400원")
+	@Test
+	public void testGetChristmasDiscount() {
+		// given
+		ReservationDate reservationDate = new ReservationDate("25");
+		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
+		BenefitCalculator benefitCalculator = new BenefitCalculator(reservationDate, decemberEventPlanner);
+		int excepted = 3400;
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getChristmasDiscount()).isEqualTo(excepted);
+	}
 }
