@@ -17,4 +17,7 @@ public enum Appetizer {
 		return menuName;
 	}
 
+	public int getPrice() {
+		return price;
+	}
 }

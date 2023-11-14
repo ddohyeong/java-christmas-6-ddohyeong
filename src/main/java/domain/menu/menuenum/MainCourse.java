@@ -17,4 +17,8 @@ public enum MainCourse {
 	public String getMenuName() {
 		return this.menuName;
 	}
+
+	public int getPrice() {
+		return price;
+	}
 }
