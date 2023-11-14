@@ -136,4 +136,34 @@ class BenefitCalculatorTest {
 		// when & then
 		Assertions.assertThat(benefitCalculator.getFreeGiftMenu()).isNull();
 	}
+
+	@DisplayName("총 혜택 금액 계산, 25일 크리스마스 디데이 할인 3400원, 평일 할인 6069원, 주말 할인 0원, 특별 할인 1000원, 증정 할인 25000원")
+	@Test
+	public void testGetTotalBenefitPriceTrue() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("25");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"티본스테이크-4,초코케이크-3");
+
+		int excepted = 35_469;
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getTotalBenefitPrice()).isEqualTo(excepted);
+	}
+
+	@DisplayName("총 주문 금액 1만원 미만시 혜택 없음")
+	@Test
+	public void testGetTotalBenefitPriceFail() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("25");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"양송이수프-1");
+
+		int excepted = 0;
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getTotalBenefitPrice()).isEqualTo(excepted);
+	}
 }

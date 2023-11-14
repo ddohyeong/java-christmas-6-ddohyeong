@@ -43,6 +43,19 @@ public class BenefitCalculator {
 		return freeGiftMenuDiscount;
 	}
 
+	public int getTotalBenefitPrice() {
+		if (eventApplicability) {
+			int benefitPrice = christmasDiscount + weekDayDiscount + weekendDayDiscount + specialDayDiscount;
+
+			if (getFreeGiftMenu() != null) {
+				benefitPrice += freeGiftMenuDiscount.getPrice();
+			}
+
+			return benefitPrice;
+		}
+		return 0;
+	}
+
 	private void isEventApplicability(OrderCalculator orderCalculator) {
 		this.eventApplicability = orderCalculator.getTotalBills() >= 10_000;
 	}
