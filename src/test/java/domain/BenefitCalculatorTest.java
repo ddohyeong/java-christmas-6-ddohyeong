@@ -15,7 +15,8 @@ class BenefitCalculatorTest {
 
 		OrderMenus orderMenus = new OrderMenus(menuManager, input);
 		menuManager.order(orderMenus);
-		return new BenefitCalculator(decemberEventPlanner, menuManager);
+		OrderCalculator orderCalculator = new OrderCalculator(menuManager);
+		return new BenefitCalculator(decemberEventPlanner, orderCalculator);
 	}
 
 	@DisplayName("총 가격 주문이 10000원 이상일때 이벤트 적용")

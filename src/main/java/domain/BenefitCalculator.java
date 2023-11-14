@@ -6,10 +6,11 @@ public class BenefitCalculator {
 	private int weekendDayDiscount = 0;
 	private int specialDayDiscount = 0;
 
-	public BenefitCalculator(DecemberEventPlanner decemberEventPlanner, MenuManager menuManager) {
+	public BenefitCalculator(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
+		isEventApplicability(orderCalculator);
 		applyChristmasDiscount(decemberEventPlanner);
-		applyWeekDayDiscount(decemberEventPlanner, menuManager);
-		applyWeekendDayDiscount(decemberEventPlanner, menuManager);
+		applyWeekDayDiscount(decemberEventPlanner, orderCalculator);
+		applyWeekendDayDiscount(decemberEventPlanner, orderCalculator);
 		applySpecialDayDiscount(decemberEventPlanner);
 	}
 
@@ -39,16 +40,16 @@ public class BenefitCalculator {
 		}
 	}
 
-	private void applyWeekDayDiscount(DecemberEventPlanner decemberEventPlanner, MenuManager menuManager) {
+	private void applyWeekDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		if (decemberEventPlanner.getWeekDayDiscount()) {
-			int dessertTotalAmount = menuManager.getMenus().get(2).getTotalAmount();
+			int dessertTotalAmount = orderCalculator.getDessertTotalAmount();
 			this.weekDayDiscount = dessertTotalAmount * 2023;
 		}
 	}
 
-	private void applyWeekendDayDiscount(DecemberEventPlanner decemberEventPlanner, MenuManager menuManager) {
+	private void applyWeekendDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		if (decemberEventPlanner.getWeekendDiscount()) {
-			int mainCourseTotalAmount = menuManager.getMenus().get(0).getTotalAmount();
+			int mainCourseTotalAmount = orderCalculator.getMainCourseTotalAmount();
 			this.weekendDayDiscount = mainCourseTotalAmount * 2023;
 		}
 	}
