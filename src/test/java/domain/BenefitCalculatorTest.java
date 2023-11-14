@@ -166,4 +166,19 @@ class BenefitCalculatorTest {
 		// when & then
 		Assertions.assertThat(benefitCalculator.getTotalBenefitPrice()).isEqualTo(excepted);
 	}
+
+	@DisplayName("혜택 후 예상 결제 금액 265_000 - 35_469 = 229_531")
+	@Test
+	public void testCalculateExpectedPayment() {
+		// given
+		MenuManager menuManager = new MenuManager();
+		DecemberEventPlanner decemberEventPlanner = getDecemberEventPlanner("25");
+		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
+				"티본스테이크-4,초코케이크-3");
+
+		int excepted = 229_531;
+
+		// when & then
+		Assertions.assertThat(benefitCalculator.getExpectedPayment()).isEqualTo(excepted);
+	}
 }

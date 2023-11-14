@@ -7,6 +7,7 @@ public class BenefitCalculator {
 	private int weekDayDiscount = 0;
 	private int weekendDayDiscount = 0;
 	private int specialDayDiscount = 0;
+	private int expectedPayment = 0;
 	private Drink freeGiftMenuDiscount;
 	private Boolean eventApplicability = false;
 
@@ -17,6 +18,7 @@ public class BenefitCalculator {
 		applyWeekendDayDiscount(decemberEventPlanner, orderCalculator);
 		applySpecialDayDiscount(decemberEventPlanner);
 		applyFreeGiftMenu(orderCalculator);
+		calculateExpectedPayment(orderCalculator);
 	}
 
 	public int getChristmasDiscount() {
@@ -54,6 +56,14 @@ public class BenefitCalculator {
 			return benefitPrice;
 		}
 		return 0;
+	}
+
+	public int getExpectedPayment() {
+		return expectedPayment;
+	}
+
+	public void calculateExpectedPayment(OrderCalculator orderCalculator) {
+		this.expectedPayment = orderCalculator.getTotalBills() - getTotalBenefitPrice();
 	}
 
 	private void isEventApplicability(OrderCalculator orderCalculator) {
