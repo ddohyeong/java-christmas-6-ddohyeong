@@ -3,6 +3,7 @@ package domain;
 import java.util.Map;
 
 import domain.menu.Menu;
+import domain.menu.menuenum.Appetizer;
 import domain.menu.menuenum.MainCourse;
 
 public class OrderTotalCalculator {
@@ -25,4 +26,18 @@ public class OrderTotalCalculator {
 
 		return mainCourseTotalPrice;
 	}
+	public int getAppetizerBills() {
+		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(1);
+		int appetizerTotalPrice = 0;
+
+		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
+			Appetizer menu = (Appetizer)entry.getKey();
+			Integer amount = entry.getValue();
+
+			appetizerTotalPrice += menu.getPrice() * amount;
+		}
+
+		return appetizerTotalPrice;
+	}
+
 }
