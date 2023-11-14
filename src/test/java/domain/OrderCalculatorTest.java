@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OrderTotalCalculatorTest {
+class OrderCalculatorTest {
 
 	@DisplayName("메인코스 주문 금액 계산")
 	@Test
@@ -16,8 +16,8 @@ class OrderTotalCalculatorTest {
 		int excepted = 109_000;
 
 		// when
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
-		int mainCourseBills = orderTotalCalculator.getMainCourseBills();
+		OrderCalculator orderCalculator = new OrderCalculator(menuManager);
+		int mainCourseBills = orderCalculator.getMainCourseBills();
 
 		// then
 		Assertions.assertThat(mainCourseBills).isEqualTo(excepted);
@@ -33,8 +33,8 @@ class OrderTotalCalculatorTest {
 		int excepted = 24_000;
 
 		// when
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
-		int appetizerBills = orderTotalCalculator.getAppetizerBills();
+		OrderCalculator orderCalculator = new OrderCalculator(menuManager);
+		int appetizerBills = orderCalculator.getAppetizerBills();
 
 		// then
 		Assertions.assertThat(appetizerBills).isEqualTo(excepted);
@@ -50,8 +50,8 @@ class OrderTotalCalculatorTest {
 		int excepted = 30_000;
 
 		// when
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
-		int dessertBills = orderTotalCalculator.getDessertBills();
+		OrderCalculator orderCalculator = new OrderCalculator(menuManager);
+		int dessertBills = orderCalculator.getDessertBills();
 
 		// then
 		Assertions.assertThat(dessertBills).isEqualTo(excepted);
@@ -67,8 +67,8 @@ class OrderTotalCalculatorTest {
 		int excepted = 60_000;
 
 		// when
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
-		int drinkBills = orderTotalCalculator.getDrinkBills();
+		OrderCalculator orderCalculator = new OrderCalculator(menuManager);
+		int drinkBills = orderCalculator.getDrinkBills();
 
 		// then
 		Assertions.assertThat(drinkBills).isEqualTo(excepted);
@@ -84,8 +84,8 @@ class OrderTotalCalculatorTest {
 		int excepted = 223_000;
 
 		// when
-		OrderTotalCalculator orderTotalCalculator = new OrderTotalCalculator(menuManager);
-		int totalBills = orderTotalCalculator.getTotalBills();
+		OrderCalculator orderCalculator = new OrderCalculator(menuManager);
+		int totalBills = orderCalculator.getTotalBills();
 
 		// then
 		Assertions.assertThat(totalBills).isEqualTo(excepted);

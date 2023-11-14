@@ -8,10 +8,10 @@ import domain.menu.menuenum.Dessert;
 import domain.menu.menuenum.Drink;
 import domain.menu.menuenum.MainCourse;
 
-public class OrderTotalCalculator {
+public class OrderCalculator {
 	private final MenuManager menuManager;
 
-	public OrderTotalCalculator(MenuManager menuManager) {
+	public OrderCalculator(MenuManager menuManager) {
 		this.menuManager = menuManager;
 	}
 
@@ -20,7 +20,7 @@ public class OrderTotalCalculator {
 	}
 
 	public int getMainCourseBills() {
-		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(0);
+		Menu<? extends Enum<?>> mainMenus = getMainCourseMenu();
 		int mainCourseTotalPrice = 0;
 
 		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
@@ -34,7 +34,7 @@ public class OrderTotalCalculator {
 	}
 
 	public int getAppetizerBills() {
-		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(1);
+		Menu<? extends Enum<?>> mainMenus = getAppetizerMenu();
 		int appetizerTotalPrice = 0;
 
 		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
@@ -48,7 +48,7 @@ public class OrderTotalCalculator {
 	}
 
 	public int getDessertBills() {
-		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(2);
+		Menu<? extends Enum<?>> mainMenus = getDessertMenu();
 		int dessertTotalPrice = 0;
 
 		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
@@ -62,7 +62,7 @@ public class OrderTotalCalculator {
 	}
 
 	public int getDrinkBills() {
-		Menu<? extends Enum<?>> mainMenus = menuManager.getMenus().get(3);
+		Menu<? extends Enum<?>> mainMenus = getDrinkMenu();
 		int drinkTotalPrice = 0;
 
 		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
@@ -74,4 +74,37 @@ public class OrderTotalCalculator {
 
 		return drinkTotalPrice;
 	}
+
+	public int getMainCourseTotalAmount() {
+		return getMainCourseMenu().getTotalAmount();
+	}
+
+	public int getAppetizerTotalAmount() {
+		return getAppetizerMenu().getTotalAmount();
+	}
+
+	public int getDessertTotalAmount() {
+		return getDessertMenu().getTotalAmount();
+	}
+
+	public int getDrinkTotalAmount() {
+		return getDrinkMenu().getTotalAmount();
+	}
+
+	private Menu<? extends Enum<?>> getMainCourseMenu() {
+		return menuManager.getMenus().get(0);
+	}
+
+	private Menu<? extends Enum<?>> getAppetizerMenu() {
+		return menuManager.getMenus().get(1);
+	}
+
+	private Menu<? extends Enum<?>> getDessertMenu() {
+		return menuManager.getMenus().get(2);
+	}
+
+	private Menu<? extends Enum<?>> getDrinkMenu() {
+		return menuManager.getMenus().get(3);
+	}
+
 }
