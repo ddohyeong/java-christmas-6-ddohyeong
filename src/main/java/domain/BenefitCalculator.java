@@ -71,7 +71,7 @@ public class BenefitCalculator {
 
 	public void calculateExpectedPayment(OrderCalculator orderCalculator) {
 		this.expectedPayment = orderCalculator.getTotalBills() - getTotalBenefitPrice();
-		if (!(freeGiftMenuDiscount == null)) {
+		if (freeGiftMenuDiscount != null) {
 			this.expectedPayment += Drink.CHAMPAGNE.getPrice();
 		}
 	}
