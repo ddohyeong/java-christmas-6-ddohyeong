@@ -99,15 +99,13 @@ public class BenefitCalculator {
 
 	private void applyWeekDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		if (decemberEventPlanner.getWeekDayDiscount()) {
-			int dessertTotalAmount = orderCalculator.getDessertTotalAmount();
-			this.weekDayDiscount = dessertTotalAmount * EVENT_YEAR.getDate();
+			this.weekDayDiscount = orderCalculator.getDessertTotalAmount() * EVENT_YEAR.getDate();
 		}
 	}
 
 	private void applyWeekendDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		if (decemberEventPlanner.getWeekendDiscount()) {
-			int mainCourseTotalAmount = orderCalculator.getMainCourseTotalAmount();
-			this.weekendDayDiscount = mainCourseTotalAmount * EVENT_YEAR.getDate();
+			this.weekendDayDiscount = orderCalculator.getMainCourseTotalAmount() * EVENT_YEAR.getDate();
 		}
 	}
 
