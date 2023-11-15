@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import domain.menu.AppetizerMenu;
 import domain.menu.DessertMenu;
@@ -33,23 +34,19 @@ public class MenuManager {
 	}
 
 	public Enum<? extends Enum<?>> findEnumValueInMenuName(String input) {
-		for (Menu<? extends Enum<?>> menuCategory : menus) {
-			Enum<? extends Enum<?>> menuTypeConverter = menuCategory.fromString(input);
+		return menus.stream()
+				.map(menuCategory -> menuCategory.fromString(input))
+				.filter(Objects::nonNull)
+				.findFirst()
+				.orElse(null);
 
-			if (menuTypeConverter != null) {
-				return menuTypeConverter;
-			}
-		}
-		return null;
 	}
 
 	public Menu<? extends Enum<?>> findMenuCategory(String input) {
-		for (Menu<? extends Enum<?>> menuType : this.menus) {
-			if (menuType.fromString(input) != null) {
-				return menuType;
-			}
-		}
-		return null;
+		return menus.stream()
+				.filter(menuType -> menuType.fromString(input) != null)
+				.findFirst()
+				.orElse(null);
 	}
 
 	private void putOrderMenu(OrderMenu orderMenu) {
@@ -67,15 +64,9 @@ public class MenuManager {
 	}
 
 	private int getTotalAmountNonDrink() {
-		int totalAmountNonDrink = 0;
-
-		for (Menu<? extends Enum<?>> menu : menus) {
-			if (!(menu instanceof DrinkMenu)) {
-				totalAmountNonDrink += menu.getTotalAmount();
-			}
-		}
-
-		return totalAmountNonDrink;
+		return menus.stream()
+				.filter(menu -> !(menu instanceof DrinkMenu))
+				.mapToInt(Menu::getTotalAmount)
+				.sum();
 	}
-
 }
