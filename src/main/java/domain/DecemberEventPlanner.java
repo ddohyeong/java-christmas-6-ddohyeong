@@ -62,13 +62,8 @@ public class DecemberEventPlanner {
 		List<Integer> specialDay = List.of(3, 10, 17, 24, 25, 31);
 		LocalDate date = reservationDate.getReservationDate();
 
-		for (Integer day : specialDay) {
-			LocalDate dateToCheck = LocalDate.of(2023, 12, day);
-
-			if (date.isEqual(dateToCheck)) {
-				return true;
-			}
-		}
-		return false;
+		return specialDay.stream()
+				.map(day -> LocalDate.of(2023, 12, day))
+				.anyMatch(date::isEqual);
 	}
 }
