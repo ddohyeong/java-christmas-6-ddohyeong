@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Map;
-
 import domain.menu.Menu;
 import domain.menu.menuenum.Appetizer;
 import domain.menu.menuenum.Dessert;
@@ -20,75 +18,63 @@ public class OrderCalculator {
 	}
 
 	public int getMainCourseBills() {
-		Menu<? extends Enum<?>> mainMenus = getMainCourseMenu();
-		int mainCourseTotalPrice = 0;
-
-		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
-			MainCourse menu = (MainCourse)entry.getKey();
-			Integer amount = entry.getValue();
-
-			mainCourseTotalPrice += menu.getPrice() * amount;
-		}
-
-		return mainCourseTotalPrice;
+		return getMainCourseMenu()
+				.getMenu()
+				.entrySet()
+				.stream()
+				.mapToInt(entry -> {
+					MainCourse menu = (MainCourse)entry.getKey();
+					int amount = entry.getValue();
+					return menu.getPrice() * amount;
+				})
+				.sum();
 	}
 
 	public int getAppetizerBills() {
-		Menu<? extends Enum<?>> mainMenus = getAppetizerMenu();
-		int appetizerTotalPrice = 0;
-
-		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
-			Appetizer menu = (Appetizer)entry.getKey();
-			Integer amount = entry.getValue();
-
-			appetizerTotalPrice += menu.getPrice() * amount;
-		}
-
-		return appetizerTotalPrice;
+		return getAppetizerMenu()
+				.getMenu()
+				.entrySet()
+				.stream()
+				.mapToInt(entry -> {
+					Appetizer menu = (Appetizer)entry.getKey();
+					int amount = entry.getValue();
+					return menu.getPrice() * amount;
+				})
+				.sum();
 	}
 
 	public int getDessertBills() {
-		Menu<? extends Enum<?>> mainMenus = getDessertMenu();
-		int dessertTotalPrice = 0;
-
-		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
-			Dessert menu = (Dessert)entry.getKey();
-			Integer amount = entry.getValue();
-
-			dessertTotalPrice += menu.getPrice() * amount;
-		}
-
-		return dessertTotalPrice;
+		return getDessertMenu()
+				.getMenu()
+				.entrySet()
+				.stream()
+				.mapToInt(entry -> {
+					Dessert menu = (Dessert)entry.getKey();
+					int amount = entry.getValue();
+					return menu.getPrice() * amount;
+				})
+				.sum();
 	}
 
 	public int getDrinkBills() {
-		Menu<? extends Enum<?>> mainMenus = getDrinkMenu();
-		int drinkTotalPrice = 0;
-
-		for (Map.Entry<? extends Enum<?>, Integer> entry : mainMenus.getMenu().entrySet()) {
-			Drink menu = (Drink)entry.getKey();
-			Integer amount = entry.getValue();
-
-			drinkTotalPrice += menu.getPrice() * amount;
-		}
-
-		return drinkTotalPrice;
+		return getDrinkMenu()
+				.getMenu()
+				.entrySet()
+				.stream()
+				.mapToInt(entry -> {
+					Drink menu = (Drink)entry.getKey();
+					int amount = entry.getValue();
+					return menu.getPrice() * amount;
+				})
+				.sum();
 	}
 
 	public int getMainCourseTotalAmount() {
 		return getMainCourseMenu().getTotalAmount();
 	}
 
-	public int getAppetizerTotalAmount() {
-		return getAppetizerMenu().getTotalAmount();
-	}
-
 	public int getDessertTotalAmount() {
 		return getDessertMenu().getTotalAmount();
-	}
-
-	public int getDrinkTotalAmount() {
-		return getDrinkMenu().getTotalAmount();
 	}
 
 	private Menu<? extends Enum<?>> getMainCourseMenu() {
