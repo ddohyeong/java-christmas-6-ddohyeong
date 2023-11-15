@@ -29,10 +29,6 @@ public class OrderMenus {
 		return orderMenus;
 	}
 
-	public int getTotalAmount() {
-		return totalAmount;
-	}
-
 	public List<String> splitByComma(String input) {
 		return Arrays.asList(input.split(","));
 	}
