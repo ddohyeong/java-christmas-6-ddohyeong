@@ -9,7 +9,6 @@ import java.util.List;
 import exception.ErrorMessage;
 
 public class OrderMenus {
-
 	private static final int MAX_MENU_AMOUNT = 20;
 
 	private final List<OrderMenu> orderMenus = new ArrayList<>();
@@ -19,8 +18,8 @@ public class OrderMenus {
 		validateOrderMenusFormat(input);
 		List<String> orderMenusByComma = splitByComma(input);
 
-		for (String s : orderMenusByComma) {
-			OrderMenu orderMenu = new OrderMenu(menuManager, s);
+		for (String orderMenusInfo : orderMenusByComma) {
+			OrderMenu orderMenu = new OrderMenu(menuManager, orderMenusInfo);
 
 			this.totalAmount += orderMenu.getAmount();
 			validateTotalAmountRange(totalAmount);
