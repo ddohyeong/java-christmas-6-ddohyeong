@@ -37,7 +37,7 @@ public class OutputView {
 
 	public void printBenefitBeforeTotalPrice(OrderCalculator orderCalculator) {
 		System.out.println(TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT.getMessage());
-		System.out.printf(FORMATTED_PRICE.getMessage(), orderCalculator.getTotalBills());
+		System.out.printf(FORMATTED_PRICE.getMessage(), orderCalculator.getTotalBills() * -1);
 		System.out.println();
 	}
 
@@ -59,7 +59,7 @@ public class OutputView {
 			printDiscount(CHRISTMAS_DISCOUNT.getMessage(), benefitCalculator.getChristmasDiscount());
 			printWeekendDiscount(benefitCalculator, decemberEventPlanner);
 			printWeekdayDiscount(benefitCalculator, decemberEventPlanner);
-			printDiscount(SPECIAL_DAY_DISCOUNT.getMessage(), benefitCalculator.getSpecialDayDiscount());
+			printSpecialDayDiscount(benefitCalculator, decemberEventPlanner);
 			printFreeGiftMenuDiscount(benefitCalculator);
 			printBlank();
 			return;
@@ -68,13 +68,17 @@ public class OutputView {
 		printBlank();
 	}
 
+	private void printSpecialDayDiscount(BenefitCalculator benefitCalculator,
+			DecemberEventPlanner decemberEventPlanner) {
+		if (decemberEventPlanner.getSpecialDiscount()) {
+			printDiscount(SPECIAL_DAY_DISCOUNT.getMessage(), benefitCalculator.getSpecialDayDiscount());
+		}
+	}
+
 	private void printFreeGiftMenuDiscount(BenefitCalculator benefitCalculator) {
 		if (benefitCalculator.isFreeGiftMenuNotNull()) {
 			printDiscount(FREE_GIFT_EVENT.getMessage(), benefitCalculator.getFreeGiftMenu().getPrice());
-			return;
 		}
-
-		System.out.printf(FORMATTED_GIFT_MENU.getMessage(), FREE_GIFT_EVENT.getMessage(), NO_GIFT_MENU.getMessage());
 	}
 
 	private void printDiscount(String label, int discountAmount) {
@@ -82,13 +86,13 @@ public class OutputView {
 	}
 
 	private void printWeekdayDiscount(BenefitCalculator benefitCalculator, DecemberEventPlanner decemberEventPlanner) {
-		if (decemberEventPlanner.getWeekDayDiscount()) {
+		if (decemberEventPlanner.getWeekDayDiscount() && (benefitCalculator.getWeekDayDiscount() > 0)) {
 			printDiscount(WEEKDAY_DISCOUNT.getMessage(), benefitCalculator.getWeekDayDiscount());
 		}
 	}
 
 	private void printWeekendDiscount(BenefitCalculator benefitCalculator, DecemberEventPlanner decemberEventPlanner) {
-		if (decemberEventPlanner.getWeekendDiscount()) {
+		if (decemberEventPlanner.getWeekendDiscount() && (benefitCalculator.getWeekendDayDiscount() > 0)) {
 			printDiscount(WEEKEND_DISCOUNT.getMessage(), benefitCalculator.getWeekendDayDiscount());
 		}
 	}
