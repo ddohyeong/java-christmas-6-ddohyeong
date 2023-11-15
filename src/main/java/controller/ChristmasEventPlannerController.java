@@ -28,12 +28,12 @@ public class ChristmasEventPlannerController {
 	}
 
 	private void getExceptedReservationDate() {
-		reservationDate = christmasEventPlannerService.setReservationDate();
+		reservationDate = christmasEventPlannerService.promptForReservationDate();
 	}
 
 	private void getExceptedOrderMenus() {
 		outputView.printEventNotice();
-		menuManager = christmasEventPlannerService.setOrderMenuManager();
+		menuManager = christmasEventPlannerService.promptForOrderMenuManager();
 	}
 
 	private void exceptedOrder() {

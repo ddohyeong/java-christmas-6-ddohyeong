@@ -1,5 +1,7 @@
 package service;
 
+import java.util.function.Supplier;
+
 import domain.MenuManager;
 import domain.OrderMenus;
 import domain.ReservationDate;
@@ -9,22 +11,22 @@ public class ChristmasEventPlannerService {
 	private final InputView inputView = new InputView();
 	private final MenuManager initManager = new MenuManager();
 
-	public ReservationDate setReservationDate() {
-		while (true) {
-			try {
-				return new ReservationDate(inputView.enterReservationDate());
-			} catch (IllegalArgumentException exception) {
-				System.out.println(exception.getMessage());
-			}
-		}
+	public ReservationDate promptForReservationDate() {
+		return promptForInput(() -> new ReservationDate(inputView.enterReservationDate()));
 	}
 
-	public MenuManager setOrderMenuManager() {
+	public MenuManager promptForOrderMenuManager() {
+		return promptForInput(() -> {
+			MenuManager orderManager = new MenuManager();
+			orderManager.order(new OrderMenus(initManager, inputView.enterOrderMenus()));
+			return orderManager;
+		});
+	}
+
+	private <T> T promptForInput(Supplier<T> supplier) {
 		while (true) {
 			try {
-				MenuManager orderManager = new MenuManager();
-				orderManager.order(new OrderMenus(initManager, inputView.enterOrderMenus()));
-				return orderManager;
+				return supplier.get();
 			} catch (IllegalArgumentException exception) {
 				System.out.println(exception.getMessage());
 			}
