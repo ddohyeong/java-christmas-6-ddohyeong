@@ -1,5 +1,7 @@
 package domain;
 
+import static message.DateMessage.*;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -40,8 +42,10 @@ public class DecemberEventPlanner {
 	}
 
 	private Boolean isChristmasDiscountDay(ReservationDate reservationDate) {
-		LocalDate christmasDiscountDayStart = LocalDate.of(2023, 12, 1);
-		LocalDate christmasDiscountDayEnd = LocalDate.of(2023, 12, 25);
+		LocalDate christmasDiscountDayStart = LocalDate.of(EVENT_YEAR.getDate(), EVENT_MONTH.getDate(),
+				EVENT_START_DAY.getDate());
+		LocalDate christmasDiscountDayEnd = LocalDate.of(EVENT_YEAR.getDate(), EVENT_MONTH.getDate(),
+				EVENT_END_DAY.getDate());
 		LocalDate date = reservationDate.getReservationDate();
 
 		return !date.isBefore(christmasDiscountDayStart) && !date.isAfter(christmasDiscountDayEnd);
@@ -63,7 +67,7 @@ public class DecemberEventPlanner {
 		LocalDate date = reservationDate.getReservationDate();
 
 		return specialDay.stream()
-				.map(day -> LocalDate.of(2023, 12, day))
+				.map(day -> LocalDate.of(EVENT_YEAR.getDate(), EVENT_MONTH.getDate(), day))
 				.anyMatch(date::isEqual);
 	}
 }

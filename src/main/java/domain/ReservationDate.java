@@ -1,5 +1,7 @@
 package domain;
 
+import static message.DateMessage.*;
+
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +15,7 @@ public class ReservationDate {
 		validateIsDigit(inputDate);
 		int date = Integer.parseInt(inputDate);
 		validateInDateRange(date);
-		this.reservationDate = LocalDate.of(2023, 12, date);
+		this.reservationDate = LocalDate.of(EVENT_YEAR.getDate(), EVENT_MONTH.getDate(), date);
 	}
 
 	public LocalDate getReservationDate() {
@@ -30,7 +32,7 @@ public class ReservationDate {
 	}
 
 	public void validateInDateRange(int date) {
-		if (!(1 <= date && date <= 31)) {
+		if (!(EVENT_START_DAY.getDate() <= date && date <= MAX_DAY.getDate())) {
 			ErrorMessage.INVALID_DATE.throwException();
 		}
 	}
