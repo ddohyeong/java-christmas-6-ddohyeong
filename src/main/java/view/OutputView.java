@@ -37,7 +37,7 @@ public class OutputView {
 
 	public void printBenefitBeforeTotalPrice(OrderCalculator orderCalculator) {
 		System.out.println(TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT.getMessage());
-		System.out.printf(FORMATTED_PRICE.getMessage(), orderCalculator.getTotalBills() * -1);
+		System.out.printf(FORMATTED_PRICE.getMessage(), orderCalculator.getTotalBills());
 		System.out.println();
 	}
 
