@@ -1,6 +1,14 @@
 package domain;
 
 public class EventBadge {
+	private static final String SANTA = "산타";
+	private static final String TREE = "트리";
+	private static final String STAR = "별";
+	private static final String NON = "없음";
+	private static final int SANTA_PRICE = 20_000;
+	private static final int TREE_PRICE = 10_000;
+	private static final int STAR_PRICE = 5_000;
+
 	private final String badge;
 
 	public EventBadge(int benefitPrice) {
@@ -13,28 +21,27 @@ public class EventBadge {
 
 	private String createEventBadgeName(int benefitPrice) {
 		if (isSantaBadge(benefitPrice)) {
-			return "산타";
+			return SANTA;
 		}
 		if (isTreeBadge(benefitPrice)) {
-			return "트리";
+			return TREE;
 		}
 		if (isStarBadge(benefitPrice)) {
-			return "별";
+			return STAR;
 		}
 
-		return "없음";
+		return NON;
 	}
 
 	private boolean isSantaBadge(int benefitPrice) {
-		return benefitPrice >= 20000;
+		return benefitPrice >= SANTA_PRICE;
 	}
 
 	private boolean isTreeBadge(int benefitPrice) {
-		return benefitPrice >= 10000;
+		return benefitPrice >= TREE_PRICE;
 	}
 
 	private boolean isStarBadge(int benefitPrice) {
-		return benefitPrice >= 5000;
+		return benefitPrice >= STAR_PRICE;
 	}
-
 }
