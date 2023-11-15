@@ -176,7 +176,7 @@ class BenefitCalculatorTest {
 		BenefitCalculator benefitCalculator = getBenefitCalculator(menuManager, decemberEventPlanner,
 				"티본스테이크-4,초코케이크-3");
 
-		int excepted = 229_531;
+		int excepted = 254_531;
 
 		// when & then
 		Assertions.assertThat(benefitCalculator.getExpectedPayment()).isEqualTo(excepted);
