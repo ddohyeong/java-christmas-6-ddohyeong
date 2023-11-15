@@ -1,13 +1,13 @@
 package domain;
 
+import static message.PriceMessage.*;
+
 public class EventBadge {
 	private static final String SANTA = "산타";
 	private static final String TREE = "트리";
 	private static final String STAR = "별";
 	private static final String NON = "없음";
-	private static final int SANTA_PRICE = 20_000;
-	private static final int TREE_PRICE = 10_000;
-	private static final int STAR_PRICE = 5_000;
+
 
 	private final String badge;
 
@@ -34,14 +34,14 @@ public class EventBadge {
 	}
 
 	private boolean isSantaBadge(int benefitPrice) {
-		return benefitPrice >= SANTA_PRICE;
+		return benefitPrice >= SANTA_PRICE.getPrice();
 	}
 
 	private boolean isTreeBadge(int benefitPrice) {
-		return benefitPrice >= TREE_PRICE;
+		return benefitPrice >= TREE_PRICE.getPrice();
 	}
 
 	private boolean isStarBadge(int benefitPrice) {
-		return benefitPrice >= STAR_PRICE;
+		return benefitPrice >= STAR_PRICE.getPrice();
 	}
 }

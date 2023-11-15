@@ -1,5 +1,8 @@
 package domain;
 
+import static message.DateMessage.*;
+import static message.PriceMessage.*;
+
 import domain.menu.menuenum.Drink;
 
 public class BenefitCalculator {
@@ -74,38 +77,39 @@ public class BenefitCalculator {
 	}
 
 	private void isEventApplicability(OrderCalculator orderCalculator) {
-		this.eventApplicability = orderCalculator.getTotalBills() >= 10_000;
+		this.eventApplicability = orderCalculator.getTotalBills() >= EVENT_APPLICABILITY_THRESHOLD.getPrice();
 	}
 
 	private void applyFreeGiftMenu(OrderCalculator orderCalculator) {
-		if (orderCalculator.getTotalBills() >= 120_000) {
+		if (orderCalculator.getTotalBills() >= FREE_GIFT_MENU_THRESHOLD.getPrice()) {
 			this.freeGiftMenuDiscount = Drink.CHAMPAGNE;
 		}
 	}
 
 	private void applyChristmasDiscount(DecemberEventPlanner decemberEventPlanner) {
 		if (decemberEventPlanner.getChristmasDiscountDay()) {
-			this.christmasDiscount = 1000 + (100 * (decemberEventPlanner.getReservationDate() - 1));
+			this.christmasDiscount =
+					CHRISTMAS_BASE_DISCOUNT.getPrice() + (100 * (decemberEventPlanner.getReservationDate() - 1));
 		}
 	}
 
 	private void applyWeekDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		if (decemberEventPlanner.getWeekDayDiscount()) {
 			int dessertTotalAmount = orderCalculator.getDessertTotalAmount();
-			this.weekDayDiscount = dessertTotalAmount * 2023;
+			this.weekDayDiscount = dessertTotalAmount * EVENT_YEAR.getDate();
 		}
 	}
 
 	private void applyWeekendDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
 		if (decemberEventPlanner.getWeekendDiscount()) {
 			int mainCourseTotalAmount = orderCalculator.getMainCourseTotalAmount();
-			this.weekendDayDiscount = mainCourseTotalAmount * 2023;
+			this.weekendDayDiscount = mainCourseTotalAmount * EVENT_YEAR.getDate();
 		}
 	}
 
 	private void applySpecialDayDiscount(DecemberEventPlanner decemberEventPlanner) {
 		if (decemberEventPlanner.getSpecialDiscount()) {
-			this.specialDayDiscount = 1000;
+			this.specialDayDiscount = SPECIAL_DAY_DISCOUNT.getPrice();
 		}
 	}
 }
