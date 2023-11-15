@@ -1,8 +1,8 @@
 package domain.menu.menuenum;
 
 public enum Dessert {
-	CHOCO_CAKE("초코케이크", 15000),
-	ICE_CREAM("아이스크림", 5000);
+	CHOCO_CAKE("초코케이크", 15_000),
+	ICE_CREAM("아이스크림", 5_000);
 
 	private final String menuName;
 	private final int price;
