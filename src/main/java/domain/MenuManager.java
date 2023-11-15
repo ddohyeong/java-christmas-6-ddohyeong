@@ -24,6 +24,13 @@ public class MenuManager {
 		return menus;
 	}
 
+	public void order(OrderMenus orderMenus) {
+		for (OrderMenu orderMenu : orderMenus.getOrderMenus()) {
+			putOrderMenu(orderMenu);
+		}
+		validateHasOnlyDrink();
+	}
+
 	public Enum<? extends Enum<?>> findEnumValueInMenuName(String input) {
 		for (Menu<? extends Enum<?>> menuCategory : menus) {
 			Enum<? extends Enum<?>> menuTypeConverter = menuCategory.fromString(input);
@@ -42,12 +49,6 @@ public class MenuManager {
 			}
 		}
 		return null;
-	}
-
-	public void order(OrderMenus orderMenus) {
-		for (OrderMenu orderMenu : orderMenus.getOrderMenus()) {
-			putOrderMenu(orderMenu);
-		}
 	}
 
 	private void putOrderMenu(OrderMenu orderMenu) {
