@@ -24,6 +24,7 @@ public class ChristmasEventPlannerController {
 		getExceptedReservationDate();
 		getExceptedOrderMenus();
 		exceptedOrder();
+		getExceptedBenefitInfo();
 	}
 
 	private void getExceptedReservationDate() {
@@ -39,5 +40,16 @@ public class ChristmasEventPlannerController {
 		decemberEventPlanner = new DecemberEventPlanner(reservationDate);
 		benefitCalculator = new BenefitCalculator(decemberEventPlanner, orderCalculator);
 		eventBadge = new EventBadge(benefitCalculator.getTotalBenefitPrice());
+	}
+
+	private void getExceptedBenefitInfo() {
+		outputView.printEventBenefitsPreviewMessage(decemberEventPlanner);
+		outputView.printOrderMenus(menuManager);
+		outputView.printBenefitBeforeTotalPrice(orderCalculator);
+		outputView.printFreeGiftMenu(benefitCalculator);
+		outputView.printBenefitDetails(benefitCalculator, decemberEventPlanner);
+		outputView.printTotalBenefits(benefitCalculator);
+		outputView.printExceptedPayment(benefitCalculator);
+		outputView.printEventBadge(eventBadge);
 	}
 }
