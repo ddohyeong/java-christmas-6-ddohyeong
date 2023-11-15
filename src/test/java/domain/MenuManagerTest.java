@@ -70,10 +70,9 @@ class MenuManagerTest {
 		MenuManager menuManager = new MenuManager();
 
 		OrderMenus orderMenus = new OrderMenus(menuManager, input);
-		menuManager.order(orderMenus);
 
 		// when & then
-		assertThatThrownBy(() -> menuManager.validateHasOnlyDrink())
+		assertThatThrownBy(() -> menuManager.order(orderMenus))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 }
