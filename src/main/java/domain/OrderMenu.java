@@ -3,6 +3,8 @@ package domain;
 import java.util.Arrays;
 import java.util.List;
 
+import exception.ErrorMessage;
+
 public class OrderMenu {
 	private final String menuName;
 	private final int amount;
@@ -35,7 +37,7 @@ public class OrderMenu {
 
 	private void validateOrderMenuFormat(String input) {
 		if (!input.matches("^[가-힣]+-\\d+$")) {
-			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+			ErrorMessage.INVALID_ORDER.throwException();
 		}
 	}
 
@@ -45,7 +47,7 @@ public class OrderMenu {
 
 	private void validateMenuExists(MenuManager menuManager, String input) {
 		if (isMenuExists(menuManager, input)) {
-			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+			ErrorMessage.INVALID_ORDER.throwException();
 		}
 	}
 
@@ -55,7 +57,7 @@ public class OrderMenu {
 
 	private void validateAmountZero(int amount) {
 		if (amount == 0) {
-			throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+			ErrorMessage.INVALID_ORDER.throwException();
 		}
 	}
 }

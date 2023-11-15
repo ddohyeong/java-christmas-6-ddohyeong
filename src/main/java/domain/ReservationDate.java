@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exception.ErrorMessage;
+
 public class ReservationDate {
 	private final LocalDate reservationDate;
 
@@ -23,13 +25,13 @@ public class ReservationDate {
 		Matcher matcher = pattern.matcher(date);
 
 		if (!matcher.matches()) {
-			throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+			ErrorMessage.INVALID_DATE.throwException();
 		}
 	}
 
 	public void validateInDateRange(int date) {
 		if (!(1 <= date && date <= 31)) {
-			throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+			ErrorMessage.INVALID_DATE.throwException();
 		}
 	}
 }

@@ -8,6 +8,7 @@ import domain.menu.DessertMenu;
 import domain.menu.DrinkMenu;
 import domain.menu.MainCourseMenu;
 import domain.menu.Menu;
+import exception.ErrorMessage;
 
 public class MenuManager {
 	private final List<Menu<? extends Enum<?>>> menus;
@@ -61,7 +62,7 @@ public class MenuManager {
 
 	public void validateHasOnlyDrink() {
 		if (getTotalAmountNonDrink() == 0) {
-			throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
+			ErrorMessage.DRINKS_ONLY_ORDER.throwException();
 		}
 	}
 
