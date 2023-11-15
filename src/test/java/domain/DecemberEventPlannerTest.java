@@ -12,6 +12,7 @@ class DecemberEventPlannerTest {
 		// given
 		ReservationDate reservationDate = new ReservationDate("12");
 		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
+
 		// when
 		Boolean christmasDiscountDay = decemberEventPlanner.getChristmasDiscountDay();
 
@@ -53,7 +54,6 @@ class DecemberEventPlannerTest {
 		// given
 		ReservationDate reservationDate = new ReservationDate("25");
 		DecemberEventPlanner decemberEventPlanner = new DecemberEventPlanner(reservationDate);
-
 
 		// when
 		Boolean specialDiscount = decemberEventPlanner.getSpecialDiscount();
