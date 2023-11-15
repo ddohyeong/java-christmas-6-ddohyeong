@@ -60,12 +60,21 @@ public class OutputView {
 			printWeekendDiscount(benefitCalculator, decemberEventPlanner);
 			printWeekdayDiscount(benefitCalculator, decemberEventPlanner);
 			printDiscount(SPECIAL_DAY_DISCOUNT.getMessage(), benefitCalculator.getSpecialDayDiscount());
-			printDiscount(FREE_GIFT_EVENT.getMessage(), benefitCalculator.getFreeGiftMenu().getPrice());
+			printFreeGiftMenuDiscount(benefitCalculator);
 			printBlank();
 			return;
 		}
 		System.out.println(NO_GIFT_MENU.getMessage());
 		printBlank();
+	}
+
+	private void printFreeGiftMenuDiscount(BenefitCalculator benefitCalculator) {
+		if (benefitCalculator.isFreeGiftMenuNotNull()) {
+			printDiscount(FREE_GIFT_EVENT.getMessage(), benefitCalculator.getFreeGiftMenu().getPrice());
+			return;
+		}
+
+		System.out.printf(FORMATTED_GIFT_MENU.getMessage(), FREE_GIFT_EVENT.getMessage(), NO_GIFT_MENU.getMessage());
 	}
 
 	private void printDiscount(String label, int discountAmount) {
@@ -89,7 +98,6 @@ public class OutputView {
 		System.out.printf(FORMATTED_BENEFIT_PRICE.getMessage(), benefitCalculator.getTotalBenefitPrice());
 		System.out.println();
 	}
-
 
 	public void printExceptedPayment(BenefitCalculator benefitCalculator) {
 		System.out.println(EXPECTED_PAYMENT.getMessage());
