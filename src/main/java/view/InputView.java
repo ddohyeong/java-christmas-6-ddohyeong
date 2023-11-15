@@ -1,6 +1,6 @@
 package view;
 
-import static view.InputMessage.*;
+import static message.InputMessage.*;
 
 import camp.nextstep.edu.missionutils.Console;
 

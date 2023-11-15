@@ -1,6 +1,6 @@
 package view;
 
-import static view.OutputMessage.*;
+import static message.OutputMessage.*;
 
 import java.util.List;
 
