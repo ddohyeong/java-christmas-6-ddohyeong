@@ -56,14 +56,9 @@ public class MainCourseMenu implements Menu<MainCourse> {
 
 	@Override
 	public List<MenuMessage> createMenusMessage() {
-		List<MenuMessage> messages = new ArrayList<>();
-		for (Map.Entry<MainCourse, Integer> mainCourse : mainMenu.entrySet()) {
-			String menuName = mainCourse.getKey().getMenuName();
-			int amount = mainCourse.getValue();
-			if (amount > 0) {
-				messages.add(new MenuMessage(menuName, amount));
-			}
-		}
-		return messages;
+		return new ArrayList<>(mainMenu.entrySet().stream()
+				.filter(entry -> entry.getValue() > 0)
+				.map(entry -> new MenuMessage(entry.getKey().getMenuName(), entry.getValue()))
+				.toList());
 	}
 }

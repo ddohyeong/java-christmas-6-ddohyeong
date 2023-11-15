@@ -55,14 +55,9 @@ public class AppetizerMenu implements Menu<Appetizer> {
 
 	@Override
 	public List<MenuMessage> createMenusMessage() {
-		List<MenuMessage> messages = new ArrayList<>();
-		for (Map.Entry<Appetizer, Integer> appetizer : appetizerMenu.entrySet()) {
-			String menuName = appetizer.getKey().getMenuName();
-			int amount = appetizer.getValue();
-			if (amount > 0) {
-				messages.add(new MenuMessage(menuName, amount));
-			}
-		}
-		return messages;
+		return new ArrayList<>(appetizerMenu.entrySet().stream()
+				.filter(entry -> entry.getValue() > 0)
+				.map(entry -> new MenuMessage(entry.getKey().getMenuName(), entry.getValue()))
+				.toList());
 	}
 }

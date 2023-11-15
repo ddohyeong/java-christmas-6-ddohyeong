@@ -59,14 +59,9 @@ public class DrinkMenu implements Menu<Drink> {
 
 	@Override
 	public List<MenuMessage> createMenusMessage() {
-		List<MenuMessage> messages = new ArrayList<>();
-		for (Map.Entry<Drink, Integer> drink : drinkMenu.entrySet()) {
-			String menuName = drink.getKey().getMenuName();
-			int amount = drink.getValue();
-			if (amount > 0) {
-				messages.add(new MenuMessage(menuName, amount));
-			}
-		}
-		return messages;
+		return new ArrayList<>(drinkMenu.entrySet().stream()
+				.filter(entry -> entry.getValue() > 0)
+				.map(entry -> new MenuMessage(entry.getKey().getMenuName(), entry.getValue()))
+				.toList());
 	}
 }
