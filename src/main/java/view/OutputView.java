@@ -117,4 +117,12 @@ public class OutputView {
 	public void printBlank() {
 		System.out.println();
 	}
+
+	public void printEventNotice() {
+		System.out.println("<주의사항>");
+		System.out.println("1. 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.");
+		System.out.println("2. 음료만 주문 시, 주문할 수 없습니다.");
+		System.out.println("3. 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+		printBlank();
+	}
 }

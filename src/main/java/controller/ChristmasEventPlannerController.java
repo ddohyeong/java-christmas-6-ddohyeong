@@ -32,6 +32,7 @@ public class ChristmasEventPlannerController {
 	}
 
 	private void getExceptedOrderMenus() {
+		outputView.printEventNotice();
 		menuManager = christmasEventPlannerService.setOrderMenuManager();
 	}
 
