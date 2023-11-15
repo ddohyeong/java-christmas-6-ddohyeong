@@ -99,7 +99,7 @@ public class OutputView {
 
 	public void printTotalBenefits(BenefitCalculator benefitCalculator) {
 		System.out.println(TOTAL_BENEFIT_AMOUNT.getMessage());
-		System.out.printf(FORMATTED_BENEFIT_PRICE.getMessage(), benefitCalculator.getTotalBenefitPrice());
+		System.out.printf(FORMATTED_PRICE.getMessage(), benefitCalculator.getTotalBenefitPrice() * -1);
 		System.out.println();
 	}
 
