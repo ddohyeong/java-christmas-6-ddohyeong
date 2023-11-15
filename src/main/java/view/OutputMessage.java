@@ -20,7 +20,8 @@ public enum OutputMessage {
 	ORDER_MENU_ITEM("%s %d개\n"),
 	FORMATTED_PRICE("%,d원\n"),
 	FORMATTED_BENEFIT_PRICE("-%,d원\n"),
-	FORMATTED_DISCOUNT_AMOUNT("%s: -%,d원\n");
+	FORMATTED_DISCOUNT_AMOUNT("%s: -%,d원\n"),
+	FORMATTED_GIFT_MENU("%s: %s\n");
 
 	private final String message;
 
