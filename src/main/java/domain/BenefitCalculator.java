@@ -89,8 +89,12 @@ public class BenefitCalculator {
 	private void applyChristmasDiscount(DecemberEventPlanner decemberEventPlanner) {
 		if (decemberEventPlanner.getChristmasDiscountDay()) {
 			this.christmasDiscount =
-					CHRISTMAS_BASE_DISCOUNT.getPrice() + (100 * (decemberEventPlanner.getReservationDate() - 1));
+					CHRISTMAS_BASE_DISCOUNT.getPrice() + calculateChristmasDiscount(decemberEventPlanner);
 		}
+	}
+
+	private int calculateChristmasDiscount(DecemberEventPlanner decemberEventPlanner) {
+		return CHRISTMAS_DISCOUNT_INCREMENT.getPrice() * (decemberEventPlanner.getReservationDate() - 1);
 	}
 
 	private void applyWeekDayDiscount(DecemberEventPlanner decemberEventPlanner, OrderCalculator orderCalculator) {
