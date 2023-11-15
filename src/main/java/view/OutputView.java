@@ -28,7 +28,7 @@ public class OutputView {
 		for (Menu<? extends Enum<?>> menu : menuManager.getMenus()) {
 			List<MenuMessage> menuMessage = menu.createMenusMessage();
 			for (MenuMessage message : menuMessage) {
-				System.out.printf(ORDER_MENU_ITEM.getMessage(), message.getMenuName(), message.getAmount());
+				System.out.printf(ORDER_MENU_ITEM.getMessage(), message.menuName(), message.amount());
 			}
 		}
 
