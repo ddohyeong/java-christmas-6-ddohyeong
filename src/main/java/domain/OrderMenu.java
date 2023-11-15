@@ -1,5 +1,7 @@
 package domain;
 
+import static message.RegexMessage.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,13 +38,13 @@ public class OrderMenu {
 	}
 
 	private void validateOrderMenuFormat(String input) {
-		if (!input.matches("^[가-힣]+-\\d+$")) {
+		if (!input.matches(ORDER_MENU_REGEX.getRegex())) {
 			ErrorMessage.INVALID_ORDER.throwException();
 		}
 	}
 
 	private List<String> splitByHyphen(String input) {
-		return Arrays.asList(input.split("-"));
+		return Arrays.asList(input.split(HYPHEN.getRegex()));
 	}
 
 	private void validateMenuExists(MenuManager menuManager, String input) {

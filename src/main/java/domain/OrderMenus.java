@@ -1,5 +1,7 @@
 package domain;
 
+import static message.RegexMessage.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +9,9 @@ import java.util.List;
 import exception.ErrorMessage;
 
 public class OrderMenus {
+
+	private static final int MAX_MENU_AMOUNT = 20;
+
 	private final List<OrderMenu> orderMenus = new ArrayList<>();
 	private int totalAmount = 0;
 
@@ -30,17 +35,17 @@ public class OrderMenus {
 	}
 
 	public List<String> splitByComma(String input) {
-		return Arrays.asList(input.split(","));
+		return Arrays.asList(input.split(COMMA.getRegex()));
 	}
 
 	private void validateOrderMenusFormat(String input) {
-		if (!input.matches("^[^,-]+-[^,-]+(,[^,-]+-[^,-]+)*$")) {
+		if (!input.matches(ORDER_MENUS_REGEX.getRegex())) {
 			ErrorMessage.INVALID_DATE.throwException();
 		}
 	}
 
 	private void validateTotalAmountRange(int totalAmount) {
-		if (totalAmount > 20) {
+		if (totalAmount > MAX_MENU_AMOUNT) {
 			ErrorMessage.MAX_MENU_EXCEEDED.throwException();
 		}
 	}
