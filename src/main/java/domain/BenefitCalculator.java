@@ -49,13 +49,17 @@ public class BenefitCalculator {
 		if (eventApplicability) {
 			int benefitPrice = christmasDiscount + weekDayDiscount + weekendDayDiscount + specialDayDiscount;
 
-			if (getFreeGiftMenu() != null) {
+			if (isFreeGiftMenuNotNull()) {
 				benefitPrice += freeGiftMenuDiscount.getPrice();
 			}
 
 			return benefitPrice;
 		}
 		return 0;
+	}
+
+	public boolean isFreeGiftMenuNotNull() {
+		return getFreeGiftMenu() != null;
 	}
 
 	public int getExpectedPayment() {
