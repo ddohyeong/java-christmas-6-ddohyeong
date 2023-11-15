@@ -1,6 +1,7 @@
 package domain;
 
 import static message.DateMessage.*;
+import static message.RegexMessage.*;
 
 import java.time.LocalDate;
 import java.util.regex.Matcher;
@@ -23,7 +24,7 @@ public class ReservationDate {
 	}
 
 	public void validateIsDigit(String date) {
-		Pattern pattern = Pattern.compile("^[0-9]+$");
+		Pattern pattern = Pattern.compile(DIGIT.getRegex());
 		Matcher matcher = pattern.matcher(date);
 
 		if (!matcher.matches()) {
