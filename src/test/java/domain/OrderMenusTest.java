@@ -1,0 +1,61 @@
+package domain;
+
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.List;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+class OrderMenusTest {
+	private final MenuManager menuManager = new MenuManager();
+
+	@DisplayName("메뉴 형식(음식-주문수,음식-주문수..) 검증")
+	@ParameterizedTest
+	@ValueSource(strings = {"양송이버섯-4, 초코케이크", "초코케이크-4,티본스테이크"})
+	public void testValidateOrderMenusFormat(String input) {
+		// when & then
+		assertThatThrownBy(() -> new OrderMenus(menuManager, input))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("메뉴 입력을 쉼표로 분리")
+	@Test
+	public void testSplitByComma() {
+		// given
+		String input = "양송이수프-1,제로콜라-1";
+		List<String> excepted = List.of("양송이수프-1", "제로콜라-1");
+
+		// when
+		OrderMenus orderMenus = new OrderMenus(menuManager, input);
+		orderMenus.splitByComma(input);
+
+		// then
+		Assertions.assertThat(orderMenus.splitByComma(input)).isEqualTo(excepted);
+	}
+
+	@DisplayName("주문 개수가 총 20개가 넘으면 예외 발생")
+	@Test
+	public void testValidateTotalAmountRange() {
+		// given
+		String input = "양송이수프-20,제로콜라-1";
+
+		// when & then
+		assertThatThrownBy(() -> new OrderMenus(menuManager, input))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("중복되는 주문 메뉴가 있는 경우 예외 발생")
+	@Test
+	public void testValidateOrderMenusDuplicate() {
+		// given
+		String input = "양송이수프-5,양송이수프-10";
+
+		// when & then
+		assertThatThrownBy(() -> new OrderMenus(menuManager, input))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
+}
